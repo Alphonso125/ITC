@@ -1,6 +1,31 @@
-<!doctype.html>
+<!doctype html>
 <html>
-  <body>
-    <h1>SOCIETY</h1>
-  </body>
+    <body>
+        <h1>Add 2 Numbers</h1>
+
+        <label>First Number</label>
+        <input type="number" id="n1" onkeyup="computeSum()">
+    <br>
+        <label>Second Number</label>
+        <input type="number" id="n2" onkeyup="computeSum()">
+    <br>
+        <label id="sumlabel">The Sum Is</label>
+        <input type="number" id="sum" readonly>
+
+    </body>
+
+    <script>
+        function computeSum(){
+            let a,b,sum;
+
+            a = document.getElementById("n1").value*1;
+            b = document.getElementById("n2").value*1;
+
+            sum = a+b;
+
+            document.getElementById("sumlabel").innerHTML
+                ="<h3>The sum of "+a+" and "+b+" is</h3>";
+            document.getElementById("sum").value = sum;
+            }
+    </script>
 </html>
