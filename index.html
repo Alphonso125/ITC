@@ -24,9 +24,8 @@
         font-size: 35px;
         text-align: left;
       }
-      #signBar {
+      .signBar {
         position: fixed;
-        top: 65px;
         left: 0px;
         width: 50%;
         height: 30px;
@@ -37,63 +36,25 @@
         font-family: Bodoni,;
         font-size: 20px;
         text-align: left;
-      }
-      #signBar2 {
-        position: fixed;
-        top: 120px;
-        left: 0px;
-        width: 50%;
-        height: 30px;
-        background-color: #edf6f9;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
         color: darkteal;
-        padding: 10px 10px 8px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-        font-family: Bodoni,;
-        font-size: 20px;
-        text-align: left;
       }
-      #signBar3 {
-        position: fixed;
-        top: 175px;
-        left: 0px;
-        width: 50%;
-        height: 30px;
-        background-color: #edf6f9;
-        color: darkteal;
-        padding: 10px 10px 8px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-        font-family: Bodoni,;
-        font-size: 20px;
-        text-align: left;
+      .signBar:hover {
+        background-color: #d0f0f2;
       }
-      #signBar4 {
-        position: fixed;
-        top: 230px;
-        left: 0px;
-        width: 50%;
-        height: 30px;
-        background-color: #edf6f9;
-        color: darkteal;
-        padding: 10px 10px 8px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-        font-family: Bodoni,;
-        font-size: 20px;
-        text-align: left;
-      }
-      p {
-        font-size: 20px;
-        color: #edf6f9;
-      }
+      #signBar { top: 65px; }
+      #signBar2 { top: 120px; }
+      #signBar3 { top: 175px; }
+      #signBar4 { top: 230px; }
       @media (max-width: 600px) {
         #topBar {
           font-size: 25px;
           height: 50px;
           padding: 5px;
         }
-        #signBar,
-        #signBar2,
-        #signBar3,
-        #signBar4 {
+        .signBar {
           width: 100%;
           font-size: 16px;
           height: 40px;
@@ -109,10 +70,10 @@
 <body>
     <h1></h1>
     <p>This is your first HTML file!</p>
-    <div id="topBar", "p">ITC</div>
-    <div id="signBar">Assignment 1</div>
-    <div id="signBar2">Assignment 2</div>
-    <div id="signBar3">Assignment 3</div>
-    <div id="signBar4">Assignment 4</div>
+    <div id="topBar">ITC</div>
+    <a href="assignment1.html" id="signBar" class="signBar">Assignment 1</a>
+    <a href="assignment2.html" id="signBar2" class="signBar">Assignment 2</a>
+    <a href="assignment3.html" id="signBar3" class="signBar">Assignment 3</a>
+    <a href="assignment4.html" id="signBar4" class="signBar">Assignment 4</a>
 </body>
 </html>
