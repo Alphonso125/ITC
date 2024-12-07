@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Payroll</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        .ndata {
+            text-align: right;
+        }
+
+        #dlgbuttons {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        #btnConfirm,
+        #btnCancel,
+        #btndelete {
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        #btnConfirm {
+            background-color: green;
+            color: white;
+        }
+
+        #btnCancel {
+            background-color: red;
+            color: white;
+        }
+
+        #dlgConfirmCancel {
+            background-color: lightgrey;
+            border-radius: 10px;
+        }
+
+        .form-section {
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .form-section label,
+        .form-section input {
+            margin: 5px 0;
+        }
+
+        #btnAddEmployee, #btndelete {
+            padding: 8px 15px;
+            background-color: #006d77;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
+
+            .form-section {
+                width: 100%;
+                align-items: center;
+            }
+
+            #btnAddEmployee, #btndelete {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            table, th, td {
+                font-size: 12px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Simple Payroll</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Employee No.</td>
+                    <td>Employee Name</td>
+                    <td>Days Worked</td>
+                    <td>Daily Rate</td>
+                    <td>Gross Pay</td>
+                    <td>Deduction</td>
+                    <td>Net Pay</td>
+                </tr>
+            </thead>
+            <tbody id="tablebody"></tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td id="tGrossPay" class="ndata">0.00</td>
+                    <td id="tDeduction" class="ndata">0.00</td>
+                    <td id="tNetPay" class="ndata">0.00</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="form-section">
+            <h3>Add New Employee</h3>
+            <label for="newName">Name:</label>
+            <input id="newName" type="text">
+            <label for="newDailyRate">Daily Rate:</label>
+            <input id="newDailyRate" type="number">
+            <label for="newDaysWorked">Days Worked:</label>
+            <input id="newDaysWorked" type="number">
+            <button id="btnAddEmployee">Add</button>
+        </div>
+
+        <div class="form-section">
+            <label for="delemployee">Delete Emp. No.:</label>
+            <input id="delemployee" type="number">
+            <button id="btndelete">Delete</button>
+        </div>
+    </div>
+
+    <dialog id="dlgConfirmCancel">
+        <form method="dialog">
+            <h4 id="dlgmsg"></h4>
+            <div id="dlgbuttons">
+                <button id="btnConfirm" value="confirm">Confirm</button>
+                <button id="btnCancel" value="cancel">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+    <script src="payrolleee.js"></script>
+</body>
+
+</html>
+
