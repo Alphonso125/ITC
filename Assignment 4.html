@@ -1,310 +1,87 @@
 <!DOCTYPE html>
-
-
-
 <html>
-
-
-
+<head>
   <style>
-
-
-
-    
-
     table, tr, tfoot, td {
-
-
-
       border: 1px solid black;
-
-
-
     }
-
-
-
     .ndata {
-
-
-
       text-align: right;
-
-
-
     }
-
-
-
     .container {
-
-
-
       display: flex;
-
-
-
       flex-direction: column;
-
-
-
       align-items: center;
-
-
-
     }
-
-
-
-     #dlgConfirmCancel, #btnConfirm, #btnCancel, #dlgAreYouSure, #btnYes, #btnNo {
-
-         border-radius:10px;
-
-
-
-     }
-
-
-
+    #dlgConfirmCancel, #btnConfirm, #btnCancel, #dlgAreYouSure, #btnYes, #btnNo {
+      border-radius:10px;
+    }
     #dlgConfirmCancel, #dlgAreYouSure {
-
-          background-color:lightgrey; //#f2f2f2;
-
-     }
-
-
-
-     #btnConfirm, #btnYes {
-
-        background-color:green;
-
-	color:white;
-
-     }
-
-
-
-     #btnCancel, #btnNo {
-
-         background-color:red;
-
-
-
-     }
-
- 
-
-     .dlgbuttons {
-
-          display:flex;
-
-          justify-content:space-evenly;
-
-     }
-
-
-
+      background-color: lightgrey;
+    }
+    #btnConfirm, #btnYes {
+      background-color: green;
+      color: white;
+    }
+    #btnCancel, #btnNo {
+      background-color: red;
+    }
+    .dlgbuttons {
+      display: flex;
+      justify-content: space-evenly;
+    }
   </style>
-
-
-
-  <body>
-
-
-
-    <div class="container">
-
-
-
-      <h2>Simple Payroll</h2>
-
-
-
-      <table>
-
-
-
-        <thead>
-
-
-
-          <tr>
-
-
-
-            <td>Employee No.</td>
-
-
-
-            <td>Employee Name</td>
-
-
-
-            <td>Days Worked</td>
-
-
-
-            <td>Daily Rate</td>
-
-
-
-            <td>Gross Pay</td>
-
-
-
-            <td>Deduction</td>
-
-
-
-            <td>Net Pay</td>
-
-
-
-          </tr>
-
-
-
-        </thead>
-
-
-
-        <tbody id="tablebody">
-
-
-
-        </tbody>
-
-
-
-        <tfoot>
-
-
-
-          <tr>
-
-
-
-            <td></td>
-
-
-
-            <td></td>
-
-
-
-            <td></td>
-
-
-
-            <td></td>
-
-
-
-            <td id="tGrossPay" class="ndata">0.00</td>
-
-
-
-            <td id="tDeduction" class="ndata">0.00</td>
-
-
-
-            <td id="tNetPay" class="ndata">0.00</td>
-
-
-
-          </tr>
-
-
-
-        </tfoot>
-
-
-
-      </table>
-
-
-
-      <div>
-
-
-
-        <label>Delete Emp. No.</label>
-
-
-
-        <input id="delemployee" type="number">
-
-        <button id="btndelete">Delete</button>
-
-        <button id="btndeleteall">Delete All</button>
-
-      </div>  
-
-
-
-    </div>
-
-
-
-   <dialog id="dlgConfirmCancel">
-
+</head>
+<body>
+  <div class="container">
+    <h2>Simple Payroll</h2>
+    <table>
+      <thead>
+        <tr>
+          <td>Employee No.</td>
+          <td>Employee Name</td>
+          <td>Days Worked</td>
+          <td>Daily Rate</td>
+          <td>Gross Pay</td>
+          <td>Deduction</td>
+          <td>Net Pay</td>
+        </tr>
+      </thead>
+      <tbody id="tablebody"></tbody>
+      <tfoot>
+        <tr>
+          <td></td><td></td><td></td><td></td>
+          <td id="tGrossPay" class="ndata">0.00</td>
+          <td id="tDeduction" class="ndata">0.00</td>
+          <td id="tNetPay" class="ndata">0.00</td>
+        </tr>
+      </tfoot>
+    </table>
+    <div>
+      <label>Delete Emp. No.</label>
+      <input id="delemployee" type="number">
+      <button id="btndelete">Delete</button>
+      <button id="btndeleteall">Delete All</button>
+    </div>  
+  </div>
+  <dialog id="dlgConfirmCancel">
     <form method="dialog">
-
-        <h4 id="dlgmsg"></h4>
-
-        <div class="dlgbuttons">
-
-           <button id="btnConfirm" value="confirm">Confirm</button>
-
-           <button id="btnCancel" value="cancel">Cancel</button>
-
-         </div>
-
-       </form>
-
-    </dialog>
-
-
-
- <dialog id="dlgAreYouSure">
-
+      <h4 id="dlgmsg"></h4>
+      <div class="dlgbuttons">
+        <button id="btnConfirm" value="confirm">Confirm</button>
+        <button id="btnCancel" value="cancel">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="dlgAreYouSure">
     <form method="dialog">
-
-        <h4 id="dlgmsg2"></h4>
-
-        <div class="dlgbuttons">
-
-           <button id="btnYes" value="yes">Yes</button>
-
-           <button id="btnNo" value="no">No</button>
-
-         </div>
-
-       </form>
-
-    </dialog>
-
-
-
-
-
-
-
-   
-
-    </body>
-
-
-
-
-
-
-
-    <script src="payrolleee.js"> </script>
-
-
-
-
-
+      <h4 id="dlgmsg2"></h4>
+      <div class="dlgbuttons">
+        <button id="btnYes" value="yes">Yes</button>
+        <button id="btnNo" value="no">No</button>
+      </div>
+    </form>
+  </dialog>
+  <script src="payroll.js"></script>
+</body>
 </html>
-
