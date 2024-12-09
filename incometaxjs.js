@@ -1,4 +1,4 @@
-(function() {
+function computeTax() {
     let ti,basictax,brackettax,totaltax;
 
     incometax=0;
@@ -34,4 +34,4 @@
     totaltax=basictax+brackettax;
     document.getElementById("incometax").value=totaltax;
 
-        })();
+        }
