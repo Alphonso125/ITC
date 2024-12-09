@@ -1,4 +1,5 @@
 var payroll=[];
+console.log(payroll); 
 
 function addEmployees() {
     payroll = []; 
