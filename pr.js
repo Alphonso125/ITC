@@ -1,6 +1,33 @@
 var payroll=[];
 console.log(payroll); 
 
+function addEmployee() {
+    let name = document.getElementById("newName").value;
+    let daysWorked = parseFloat(document.getElementById("newDaysWorked").value);
+    let dailyRate = parseFloat(document.getElementById("newDailyRate").value);
+    let deduction = parseFloat(document.getElementById("newDeduction").value);
+
+    if (name && !isNaN(daysWorked) && !isNaN(dailyRate) && !isNaN(deduction)) {
+        let grossPay = (daysWorked * dailyRate).toFixed(2);
+        let netPay = (grossPay - deduction).toFixed(2);
+
+        let employee = {
+            name: name,
+            daysWorked: daysWorked,
+            dailyRate: dailyRate,
+            grossPay: grossPay,
+            deduction: deduction,
+            netPay: netPay
+        };
+
+        payroll.push(employee);
+        showEmployees();
+        clearInputs();
+    } else {
+        alert("Please fill in all fields correctly.");
+    }
+}
+
 function addEmployees() {
     payroll = []; 
     let emp1 = {
