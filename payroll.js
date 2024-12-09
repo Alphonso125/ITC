@@ -1,5 +1,45 @@
 var payroll=[];
 
+document.getElementById("btnAddEmployee").addEventListener("click", () => {
+  // Get input values
+  const name = document.getElementById("empName").value.trim();
+  const days = parseFloat(document.getElementById("empDays").value);
+  const rate = parseFloat(document.getElementById("empRate").value);
+  const deduction = parseFloat(document.getElementById("empDeduction").value);
+
+  // Validate input
+  if (!name || isNaN(days) || isNaN(rate) || isNaN(deduction) || days < 0 || rate < 0 || deduction < 0) {
+    alert("Please enter valid details for the employee.");
+    return;
+  }
+
+  // Calculate pay
+  const grosspay = (days * rate).toFixed(2);
+  const netpay = (grosspay - deduction).toFixed(2);
+
+  // Add to payroll array
+  payroll.push({
+    name: name,
+    daysworked: days,
+    dailyrate: rate,
+    grosspay: grosspay,
+    deduction: deduction,
+    netpay: netpay,
+  });
+
+  // Refresh the employee table
+  showEmployees();
+
+  // Clear inputs
+  document.getElementById("empName").value = "";
+  document.getElementById("empDays").value = "";
+  document.getElementById("empRate").value = "";
+  document.getElementById("empDeduction").value = "";
+
+  alert("Employee added successfully!");
+});
+
+
 function addEmployees() {
     payroll = []; // Initialize payroll
     let emp1 = {
