@@ -1,87 +1,80 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <style>
-    table, tr, tfoot, td {
-      border: 1px solid black;
-    }
-    .ndata {
-      text-align: right;
-    }
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    #dlgConfirmCancel, #btnConfirm, #btnCancel, #dlgAreYouSure, #btnYes, #btnNo {
-      border-radius:10px;
-    }
-    #dlgConfirmCancel, #dlgAreYouSure {
-      background-color: lightgrey;
-    }
-    #btnConfirm, #btnYes {
-      background-color: green;
-      color: white;
-    }
-    #btnCancel, #btnNo {
-      background-color: red;
-    }
-    .dlgbuttons {
-      display: flex;
-      justify-content: space-evenly;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <style type="text/css"> 
+      body {
+        background-color: #83c5be;
+      }
+      #topBar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        background-color: #006d77;
+        color: white;
+        padding: 10px 10px 12px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        text-shadow: -3px 3px #004f57;
+        z-index: 1000;
+        font-family: Bodoni,;
+        font-size: 35px;
+        text-align: left;
+      }
+      .signBar {
+        position: fixed;
+        left: 0px;
+        width: 30%;
+        height: 30px;
+        background-color: #edf6f9;
+        color: darkteal;
+        padding: 10px 10px 8px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        font-family: Bodoni,;
+        font-size: 20px;
+        text-align: left;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        color: darkteal;
+      }
+      .signBar:hover {
+        background-color: #d0f0f2;
+      }
+      #signBar { top: 65px; }
+      #signBar2 { top: 120px; }
+      #signBar3 { top: 175px; }
+      #signBar4 { top: 230px; }
+      @media (max-width: 600px) {
+        #topBar {
+          font-size: 25px;
+          height: 50px;
+          padding: 5px;
+        }
+        .signBar {
+          width: 100%;
+          font-size: 16px;
+          height: 40px;
+          padding: 5px;
+        }
+        #signBar { top: 60px; }
+        #signBar2 { top: 110px; }
+        #signBar3 { top: 160px; }
+        #signBar4 { top: 210px; }
+      }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Simple Payroll</h2>
-    <table>
-      <thead>
-        <tr>
-          <td>Employee No.</td>
-          <td>Employee Name</td>
-          <td>Days Worked</td>
-          <td>Daily Rate</td>
-          <td>Gross Pay</td>
-          <td>Deduction</td>
-          <td>Net Pay</td>
-        </tr>
-      </thead>
-      <tbody id="tablebody"></tbody>
-      <tfoot>
-        <tr>
-          <td></td><td></td><td></td><td></td>
-          <td id="tGrossPay" class="ndata">0.00</td>
-          <td id="tDeduction" class="ndata">0.00</td>
-          <td id="tNetPay" class="ndata">0.00</td>
-        </tr>
-      </tfoot>
-    </table>
-    <div>
-      <label>Delete Emp. No.</label>
-      <input id="delemployee" type="number">
-      <button id="btndelete">Delete</button>
-      <button id="btndeleteall">Delete All</button>
-    </div>  
-  </div>
-  <dialog id="dlgConfirmCancel">
-    <form method="dialog">
-      <h4 id="dlgmsg"></h4>
-      <div class="dlgbuttons">
-        <button id="btnConfirm" value="confirm">Confirm</button>
-        <button id="btnCancel" value="cancel">Cancel</button>
-      </div>
-    </form>
-  </dialog>
-  <dialog id="dlgAreYouSure">
-    <form method="dialog">
-      <h4 id="dlgmsg2"></h4>
-      <div class="dlgbuttons">
-        <button id="btnYes" value="yes">Yes</button>
-        <button id="btnNo" value="no">No</button>
-      </div>
-    </form>
-  </dialog>
-  <script src="payroll.js"></script>
+    <h1></h1>
+    <p>This is your first HTML file!</p>
+    <div id="topBar">ITC</div>
+    <a href="Assignment 1.html" id="signBar" class="signBar">Assignment 1</a>
+    <a href="Assignment 2.html" id="signBar2" class="signBar">Assignment 2</a>
+    <a href="Assignment 3.html" id="signBar3" class="signBar">Assignment 3</a>
+    <a href="Assignment 4.html" id="signBar4" class="signBar">Assignment 4</a>
 </body>
 </html>
