@@ -2,139 +2,139 @@ var payroll=[];
 
 
 
-   function addEmployees() {
+function addEmployees() {
 
 
 
-        payroll = []; // Initialize payroll
+payroll = []; // Initialize payroll
 
 
 
-        let emp1 = {
+let emp1 = {
 
-          name: "John Von Nuemann",
+  name: "John Von Nuemann",
 
-          daysworked: 10.00,
+  daysworked: 10.00,
 
-          dailyrate: 500.00,
+  dailyrate: 500.00,
 
-          grosspay: (10.00 * 500.00).toFixed(2),
+  grosspay: (10.00 * 500.00).toFixed(2),
 
-          deduction: 100.00,
+  deduction: 100.00,
 
-          netpay: ((10.00 * 500.00) - 100.00).toFixed(2),
+  netpay: ((10.00 * 500.00) - 100.00).toFixed(2),
 
-        };
+};
 
 
 
-        payroll.push(emp1);
+payroll.push(emp1);
 
 
 
-        let emp2 = {
+let emp2 = {
 
-          name: "Charles W. Babbage",
+  name: "Charles W. Babbage",
 
-          daysworked: 12.00,
+  daysworked: 12.00,
 
-          dailyrate: 600.00,
+  dailyrate: 600.00,
 
-          grosspay: (12.00 * 600.00).toFixed(2),
+  grosspay: (12.00 * 600.00).toFixed(2),
 
-          deduction: 200.00,
+  deduction: 200.00,
 
-          netpay: ((12.00 * 600.00) - 200.00).toFixed(2),
+  netpay: ((12.00 * 600.00) - 200.00).toFixed(2),
 
-        };
+};
 
 
 
-        payroll.push(emp2);
+payroll.push(emp2);
 
 
 
-        let emp3 = {
+let emp3 = {
 
-          name: "Vint E. Cerf",
+  name: "Vint E. Cerf",
 
-          daysworked: 15.00,
+  daysworked: 15.00,
 
-          dailyrate: 550.00,
+  dailyrate: 550.00,
 
-          grosspay: (15.00 * 550.00).toFixed(2),
+  grosspay: (15.00 * 550.00).toFixed(2),
 
-          deduction: 200.00,
+  deduction: 200.00,
 
-          netpay: ((15.00 * 550.00) - 200.00).toFixed(2),
+  netpay: ((15.00 * 550.00) - 200.00).toFixed(2),
 
 
 
-        };
+};
 
 
 
-        payroll.push(emp3);
+payroll.push(emp3);
 
 
 
-      }
+}
 
-     function showEmployees() {
+function showEmployees() {
 
 
 
-        let tb = "", trec = "", tgpay = 0.00, tded = 0.00, tnetpay = 0.00
+let tb = "", trec = "", tgpay = 0.00, tded = 0.00, tnetpay = 0.00
 
-        let lno = 1;
+let lno = 1;
 
 
 
-        for (emp of payroll) {
+for (emp of payroll) {
 
 
 
-          trec = "<tr>"
+  trec = "<tr>"
 
-            + '<td style="text-align:right">' + lno.toFixed(0) + "</td>"
+    + '<td style="text-align:right">' + lno.toFixed(0) + "</td>"
 
-            + "<td>" + emp.name + "</td>"
+    + "<td>" + emp.name + "</td>"
 
-            + '<td class="ndata">' + emp.daysworked.toFixed(2) + "</td>"
+    + '<td class="ndata">' + emp.daysworked.toFixed(2) + "</td>"
 
-            + '<td class="ndata">' + emp.dailyrate.toFixed(2) + "</td>"
+    + '<td class="ndata">' + emp.dailyrate.toFixed(2) + "</td>"
 
-            + '<td class="ndata">' + emp.grosspay + "</td>"
+    + '<td class="ndata">' + emp.grosspay + "</td>"
 
-            + '<td class="ndata">' + emp.deduction.toFixed(2) + "</td>"
+    + '<td class="ndata">' + emp.deduction.toFixed(2) + "</td>"
 
-            + '<td class="ndata">' + emp.netpay + "</td>"
+    + '<td class="ndata">' + emp.netpay + "</td>"
 
-            + "</tr>";
+    + "</tr>";
 
 
 
-          tb += trec;
+  tb += trec;
 
-	  tgpay += emp.grosspay*1;
+  tgpay += emp.grosspay*1;
 
-          ++lno;
+  ++lno;
 
 
 
-        }
+}
 
 
 
-        document.getElementById("tablebody").innerHTML = tb;
+document.getElementById("tablebody").innerHTML = tb;
 
-        document.getElementById("tGrossPay").innerHTML = tgpay.toFixed(2);
+document.getElementById("tGrossPay").innerHTML = tgpay.toFixed(2);
 
 
 
 
 
-      }
+}
 
 
 
