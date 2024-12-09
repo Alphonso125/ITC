@@ -1,4 +1,4 @@
-var payroll = [];
+let payroll = [];
 
 function addEmployees() {
     payroll = [
