@@ -1,3 +1,8 @@
+document.addEventListener("DOMContentLoaded", function() {
+    var taxableIncomeInput = document.getElementById("ti");
+    taxableIncomeInput.addEventListener("input", computeTax);
+});
+
 function computeTax(){
     let ti,basictax,brackettax,totaltax;
 
