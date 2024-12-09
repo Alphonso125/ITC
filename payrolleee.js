@@ -1,283 +1,113 @@
-var payroll=[];
-
-
+ let payroll = [];
 
 function addEmployees() {
-
-
-
-payroll = []; // Initialize payroll
-
-
-
-let emp1 = {
-
-  name: "John Von Nuemann",
-
-  daysworked: 10.00,
-
-  dailyrate: 500.00,
-
-  grosspay: (10.00 * 500.00).toFixed(2),
-
-  deduction: 100.00,
-
-  netpay: ((10.00 * 500.00) - 100.00).toFixed(2),
-
-};
-
-
-
-payroll.push(emp1);
-
-
-
-let emp2 = {
-
-  name: "Charles W. Babbage",
-
-  daysworked: 12.00,
-
-  dailyrate: 600.00,
-
-  grosspay: (12.00 * 600.00).toFixed(2),
-
-  deduction: 200.00,
-
-  netpay: ((12.00 * 600.00) - 200.00).toFixed(2),
-
-};
-
-
-
-payroll.push(emp2);
-
-
-
-let emp3 = {
-
-  name: "Vint E. Cerf",
-
-  daysworked: 15.00,
-
-  dailyrate: 550.00,
-
-  grosspay: (15.00 * 550.00).toFixed(2),
-
-  deduction: 200.00,
-
-  netpay: ((15.00 * 550.00) - 200.00).toFixed(2),
-
-
-
-};
-
-
-
-payroll.push(emp3);
-
-
-
+    payroll = [
+        {
+            name: "John Von Neumann",
+            daysworked: 10,
+            dailyrate: 500,
+            deduction: 100,
+        },
+        {
+            name: "Charles W. Babbage",
+            daysworked: 12,
+            dailyrate: 600,
+            deduction: 200,
+        },
+        {
+            name: "Vint E. Cerf",
+            daysworked: 15,
+            dailyrate: 550,
+            deduction: 200,
+        },
+    ];
 }
+
+
+function calculatePay(emp) {
+    emp.grosspay = (emp.daysworked * emp.dailyrate).toFixed(2);
+    emp.netpay = (emp.grosspay - emp.deduction).toFixed(2);
+}
+
 
 function showEmployees() {
-
-
-
-let tb = "", trec = "", tgpay = 0.00, tded = 0.00, tnetpay = 0.00
-
-let lno = 1;
-
-
-
-for (emp of payroll) {
-
-
-
-  trec = "<tr>"
-
-    + '<td style="text-align:right">' + lno.toFixed(0) + "</td>"
-
-    + "<td>" + emp.name + "</td>"
-
-    + '<td class="ndata">' + emp.daysworked.toFixed(2) + "</td>"
-
-    + '<td class="ndata">' + emp.dailyrate.toFixed(2) + "</td>"
-
-    + '<td class="ndata">' + emp.grosspay + "</td>"
-
-    + '<td class="ndata">' + emp.deduction.toFixed(2) + "</td>"
-
-    + '<td class="ndata">' + emp.netpay + "</td>"
-
-    + "</tr>";
-
-
-
-  tb += trec;
-
-  tgpay += emp.grosspay*1;
-
-  ++lno;
-
-
-
+    let tbody = "";
+    payroll.forEach((emp, index) => {
+        calculatePay(emp); 
+        tbody += `
+            <tr>
+                <td class="ndata">${index + 1}</td>
+                <td>${emp.name}</td>
+                <td contenteditable="true" class="ndata" onblur="updateDaysWorked(${index}, this.innerText)">${emp.daysworked.toFixed(2)}</td>
+                <td class="ndata">${emp.dailyrate.toFixed(2)}</td>
+                <td class="ndata">${emp.grosspay}</td>
+                <td class="ndata">${emp.deduction.toFixed(2)}</td>
+                <td class="ndata">${emp.netpay}</td>
+            </tr>
+        `;
+    });
+    document.getElementById("tablebody").innerHTML = tbody;
 }
 
 
-
-document.getElementById("tablebody").innerHTML = tb;
-
-document.getElementById("tGrossPay").innerHTML = tgpay.toFixed(2);
-
-
-
-
-
+function updateDaysWorked(index, value) {
+    const days = parseFloat(value);
+    if (!isNaN(days) && days >= 0) {
+        payroll[index].daysworked = days;
+        showEmployees(); 
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    addEmployees();
+    showEmployees();
+
+    document.getElementById("btnAddEmployee").addEventListener("click", () => {
+        const name = document.getElementById("newName").value;
+        const dailyRate = parseFloat(document.getElementById("newDailyRate").value);
+        const daysWorked = parseFloat(document.getElementById("newDaysWorked").value);
+
+    
+        if (name && !isNaN(dailyRate) && dailyRate > 0 && !isNaN(daysWorked) && daysWorked >= 0) {
+            payroll.push({
+                name,
+                dailyrate: dailyRate,
+                daysworked: daysWorked,
+                deduction: 0, 
+            });
+
+            showEmployees();
+
+        
+            document.getElementById("newName").value = "";
+            document.getElementById("newDailyRate").value = "";
+            document.getElementById("newDaysWorked").value = "";
+        } else {
+            alert("Please enter valid employee details.");
+        }
+    });
 
 
-      
+    document.getElementById("btndelete").addEventListener("click", () => {
+        const index = parseInt(document.getElementById("delemployee").value) - 1;
 
-
-
-   
-
- // the main program
-
- document.addEventListener("DOMContentLoaded", () => {
-
-
-
-	addEmployees();
-
-        showEmployees();
-
-
-
-        dlgConfirmCancel = document.getElementById("dlgConfirmCancel");
-
- 
-
-        document.getElementById("btndelete").addEventListener("click",()=>{
-
-          let x = document.getElementById("delemployee").value *1 - 1;
-
-
-
-          if ((x >= 0) && (x<payroll.length)) {
-
-
-
-          document.getElementById("dlgmsg").innerHTML = "Delete the employee " + (x + 1)+" " + payroll[x].name+"?";
-
-
-
+        if (index >= 0 && index < payroll.length) {
+            document.getElementById("dlgmsg").innerText = `Delete the employee ${index + 1} (${payroll[index].name})?`;
             dlgConfirmCancel.showModal();
-
-
-
-          }   
-
-        });
-
-
-
-     document.getElementById("btndeleteall").addEventListener("click",()=>{
-
-          document.getElementById("dlgmsg").innerHTML = "Delete all records?";
-
-          dlgConfirmCancel.showModal();
-
-
-
-
-
-      });
-
-
-
-   dlgConfirmCancel.addEventListener("close", (e) => {
-
-
-
-          var rst = e.target.returnValue;
-
-          
-
-          if (rst === "confirm") {
-
-               dlgmsg=document.getElementById("dlgmsg").innerHTML;
-
-
-
-               if (dlgmsg=="Delete all records?"){
-
-                  dlgAreYouSure=document.getElementById("dlgAreYouSure");
-
-
-
-                  document.getElementById("dlgmsg2").innerHTML ="Are you sure?";
-
-                  dlgAreYouSure.showModal();
-
-
-
-               } else { 
-
-                  // deleting 1 record
-
-                  var x = document.getElementById("delemployee").value * 1 - 1;
-
-
-
-                  payroll.splice(x, 1);
-
-
-
-                  showEmployees();
-
-
-
-                  document.getElementById("delemployee").value = '';
-
-              }
-
-
-
-          }
-
-
-
-        });
-
-
-
-    dlgAreYouSure=document.getElementById("dlgAreYouSure");
-
-
-
-    dlgAreYouSure.addEventListener("close", (e) => {
-
-
-
-          var rst = e.target.returnValue;
-
-          
-
-          if (rst === "yes") {
-
-
-
-                 payroll=[];
-
-                 showEmployees();
-
-          }
-
-     });
-
-  
-
- });  
+        } else {
+            alert("Invalid employee number.");
+        }
+    });
+
+
+    dlgConfirmCancel.addEventListener("close", (e) => {
+        if (e.target.returnValue === "confirm") {
+            const index = parseInt(document.getElementById("delemployee").value) - 1;
+
+            if (index >= 0 && index < payroll.length) {
+                payroll.splice(index, 1);
+                showEmployees(); 
+                document.getElementById("delemployee").value = "";
+            }
+        }
+    });
+});
