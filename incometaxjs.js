@@ -1,4 +1,4 @@
-function computeTax() {
+function computeTax(){
     let ti,basictax,brackettax,totaltax;
 
     incometax=0;
