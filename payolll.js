@@ -1,81 +1,96 @@
 var payroll = [];
 
+function clearInputs() {
+  document.getElementById("empName").value = "";
+  document.getElementById("daysWorked").value = "";
+  document.getElementById("dailyRate").value = "";
+  document.getElementById("deduction").value = "";
+  document.getElementById("delemployee").value = "";
+}
+
 function addEmployee() {
-  let name = document.getElementById("newName").value;
-  let daysWorked = parseFloat(document.getElementById("newDaysWorked").value);
-  let dailyRate = parseFloat(document.getElementById("newDailyRate").value);
-  let deduction = parseFloat(document.getElementById("newDeduction").value);
+  const name = document.getElementById("empName").value;
+  const daysWorked = parseFloat(document.getElementById("daysWorked").value);
+  const dailyRate = parseFloat(document.getElementById("dailyRate").value);
+  const deduction = parseFloat(document.getElementById("deduction").value);
 
   if (name && !isNaN(daysWorked) && !isNaN(dailyRate) && !isNaN(deduction)) {
-    let grossPay = (daysWorked * dailyRate).toFixed(2);
-    let netPay = (grossPay - deduction).toFixed(2);
-
-    let employee = {
-      name: name,
-      daysWorked: daysWorked,
-      dailyRate: dailyRate,
-      grossPay: grossPay,
-      deduction: deduction,
-      netPay: netPay
-    };
-
-    payroll.push(employee);
+    const grossPay = daysWorked * dailyRate;
+    const netPay = grossPay - deduction;
+    payroll.push({ name, daysWorked, dailyRate, grossPay, deduction, netPay });
     showEmployees();
-    clearInputs();
-  } else {
-    alert("Please fill in all fields correctly.");
   }
+  clearInputs();
 }
 
 function showEmployees() {
-  let tableBody = document.getElementById("tablebody");
-  tableBody.innerHTML = "";
-
+  let tableContent = "";
   payroll.forEach((emp, index) => {
-    let row = document.createElement("tr");
-
-    let empNo = document.createElement("td");
-    empNo.textContent = (index + 1);
-    row.appendChild(empNo);
-
-    let empName = document.createElement("td");
-    empName.textContent = emp.name;
-    row.appendChild(empName);
-
-    let empDaysWorked = document.createElement("td");
-    empDaysWorked.className = "ndata";
-    empDaysWorked.textContent = emp.daysWorked.toFixed(2);
-    row.appendChild(empDaysWorked);
-
-    let empDailyRate = document.createElement("td");
-    empDailyRate.className = "ndata";
-    empDailyRate.textContent = emp.dailyRate.toFixed(2);
-    row.appendChild(empDailyRate);
-
-    let empGrossPay = document.createElement("td");
-    empGrossPay.className = "ndata";
-    empGrossPay.textContent = emp.grossPay;
-    row.appendChild(empGrossPay);
-
-    let empDeduction = document.createElement("td");
-    empDeduction.className = "ndata";
-    empDeduction.textContent = emp.deduction.toFixed(2);
-    row.appendChild(empDeduction);
-
-    let empNetPay = document.createElement("td");
-    empNetPay.className = "ndata";
-    empNetPay.textContent = emp.netPay;
-    row.appendChild(empNetPay);
-
-    tableBody.appendChild(row);
+    tableContent += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${emp.name}</td>
+        <td class="ndata">${emp.daysWorked.toFixed(2)}</td>
+        <td class="ndata">${emp.dailyRate.toFixed(2)}</td>
+        <td class="ndata">${emp.grossPay.toFixed(2)}</td>
+        <td class="ndata">${emp.deduction.toFixed(2)}</td>
+        <td class="ndata">${emp.netPay.toFixed(2)}</td>
+      </tr>`;
   });
+  document.getElementById("tablebody").innerHTML = tableContent;
 }
 
-function clearInputs() {
-  document.getElementById("newName").value = "";
-  document.getElementById("newDaysWorked").value = "";
-  document.getElementById("newDailyRate").value = "";
-  document.getElementById("newDeduction").value = "";
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const dlgConfirmCancel = document.getElementById("dlgConfirmCancel");
+  const dlgAreYouSure = document.getElementById("dlgAreYouSure");
 
-document.getElementById("btnAddEmployee").addEventListener("click", addEmployee);
+  document.getElementById("btnAddEmployee").addEventListener("click", addEmployee);
+
+  document.getElementById("btndelete").addEventListener("click", () => {
+    const index = parseInt(document.getElementById("delemployee").value) - 1;
+    if (index >= 0 && index < payroll.length) {
+      document.getElementById("dlgmsg").innerHTML = `Delete employee ${index + 1}: ${payroll[index].name}?`;
+      dlgConfirmCancel.showModal();
+
+      dlgConfirmCancel.addEventListener(
+        "close",
+        () => {
+          if (dlgConfirmCancel.returnValue === "confirm") {
+            payroll.splice(index, 1);
+            showEmployees();
+          }
+          clearInputs();
+        },
+        { once: true }
+      );
+    }
+  });
+
+  document.getElementById("btndeleteall").addEventListener("click", () => {
+    document.getElementById("dlgmsg").innerHTML = "Delete all records?";
+    dlgConfirmCancel.showModal();
+
+    dlgConfirmCancel.addEventListener(
+      "close",
+      () => {
+        if (dlgConfirmCancel.returnValue === "confirm") {
+          document.getElementById("dlgmsg2").innerHTML = "Are you sure?";
+          dlgAreYouSure.showModal();
+
+          dlgAreYouSure.addEventListener(
+            "close",
+            () => {
+              if (dlgAreYouSure.returnValue === "yes") {
+                payroll = [];
+                showEmployees();
+              }
+              clearInputs();
+            },
+            { once: true }
+          );
+        }
+      },
+      { once: true }
+    );
+  });
+});
